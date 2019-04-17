@@ -11,3 +11,5 @@ https://www.gnu.org/software/libc/manual/html_node/Finding-Tokens-in-a-String.ht
 
 https://www.geeksforgeeks.org/c-programming-language/#Array&Strings
 
+remote branches are bullshit. do this
+git push -u origin master, <master> or whatever branch you have. 
