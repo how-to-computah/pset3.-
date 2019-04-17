@@ -12,7 +12,8 @@ int duration(string fraction)
 {
 // Parse the fraction. 
 string numerator = strtok(fraction, "/"); 
-// In the next call to strtok, the first parameter needs to be NULL so that strtok starts splitting the string from the next token's starting position it remembers.
+// In the next call to strtok, the first parameter needs to be NULL so that strtok starts
+// splitting the string from the next token's starting position it remembers.
 string denominator = strtok(NULL, "/"); 
 
 // Do math to find how many eighths in the note. 
