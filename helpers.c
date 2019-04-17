@@ -22,6 +22,7 @@ int duration(string fraction)
 				f_eighths /= .125;
 
 				int eighths = (int)f_eighths;
+
 }
 
 /*frequency, which should take as input as a string a note formatted as
