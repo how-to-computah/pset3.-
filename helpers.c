@@ -3,9 +3,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
-
 #include "helpers.h"
-
 
 /*duration, which should take as input as a string a fraction (e.g., 1/4)
     and return as an int a corresponding number of eigths (2, in this case, since 1/4 is equivalent to 2/8)*/
