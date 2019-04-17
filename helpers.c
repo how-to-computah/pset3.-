@@ -15,7 +15,6 @@ int duration(string fraction)
 				// In the next call to strtok, the first parameter needs to be NULL so that strtok starts
 				// splitting the string from the next token's starting position it remembers.
 				string denominator = strtok(NULL, "/"); 
-
 				// Do math to find how many eighths in the note. 
 				float f_eighths = (atoi(numerator)/atoi(denominator));
 
