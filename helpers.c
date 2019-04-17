@@ -27,7 +27,7 @@ int duration(string fraction)
         }
       else
         {
-            // Convert string to double float.  
+            // Convert string to double.  
           sscanf(numerator, "%lf", &n);
           sscanf(denominator, "%lf", &d);
           f_eighths = n / d;
