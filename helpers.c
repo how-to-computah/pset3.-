@@ -19,7 +19,7 @@ string denominator = strtok(NULL, "/");
 
 float f_eighths = (atoi(numerator)/atoi(denominator));
 
-f_eighths /= .125
+f_eighths /= .125;
 
 int eighths = (int)f_eighths;
 
