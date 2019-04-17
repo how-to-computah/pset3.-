@@ -11,23 +11,27 @@
 int duration(string fraction)
 {
     double d, n ; 
-  
+    float f_eighths = 0;  
+
       // Parse the fraction. 
     string numerator = strtok (fraction, "/");
       // In the next call to strtok, the first parameter needs to be NULL so that strtok starts
       // splitting the string from the next token's starting position it remembers.
     string denominator = strtok (NULL, "/");
-    if (numerator == "1" && denominator == NULL)
-      {
-        f_eights = 1;
-      }
-    else
-    {
-        // Convert string to double float.  
-      sscanf(numerator, "%lf", &n);
-      sscanf(denominator, "%lf", &d);
-      float f_eighths = n / d;
-    }
+
+    //Convert numerator to double to check for whole notes. 
+    sscanf(numerator, "%lf", &n);
+      if (n >= 1 && denominator == NULL)
+        {
+          f_eighths = n;
+        }
+      else
+        {
+            // Convert string to double float.  
+          sscanf(numerator, "%lf", &n);
+          sscanf(denominator, "%lf", &d);
+          f_eighths = n / d;
+        }
       //Divide to see how many eighths are in the note.
     f_eighths /= .125;
       //Convert float to int. 
