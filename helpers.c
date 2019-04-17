@@ -16,7 +16,7 @@ int duration(string fraction)
 
 /*frequency, which should take as input as a string a note formatted as
 
-XY (e.g., A4), where X is any of A through G and Y is any of 0 through 8, or
+https://github.com/make-go-fast-good/pset3.-.gitXY (e.g., A4), where X is any of A through G and Y is any of 0 through 8, or
 
 XYZ (e.g., A#4), where X is any of A through G, Y is # or b, and Z is any of 0 through 8,
 
