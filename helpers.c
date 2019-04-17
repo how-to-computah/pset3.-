@@ -10,18 +10,33 @@
 // Converts a fraction formatted as X/Y to eighths
 int duration(string fraction)
 {
-  // Parse the fraction. 
-  string numerator = strtok(fraction, "/"); 
-  // In the next call to strtok, the first parameter needs to be NULL so that strtok starts
-  // splitting the string from the next token's starting position it remembers.
-  string denominator = strtok(NULL, "/"); 
-  // Do math to find how many eighths in the note. 
-  float f_eighths = (atoi(numerator)/atoi(denominator));
+  /* // Parse the fraction. */ 
+  /* string numerator = strtok(fraction, "/"); */ 
+  /* // In the next call to strtok, the first parameter needs to be NULL so that strtok starts */
+  /* // splitting the string from the next token's starting position it remembers. */
+  /* string denominator = strtok(NULL, "/"); */ 
+  /* // Do math to find how many eighths in the note. */ 
+  /* float f_eighths = (atoi(numerator)/atoi(denominator)); */
 
-  f_eighths /= .125;
+  /* f_eighths /= .125; */
 
-  int eighths = (int)f_eighths;
+  /* int eighths = (int)f_eighths; */
+  double d, n ; 
+  
+      // Parse the fraction. 
+    string numerator = strtok (fraction, "/");
+      // In the next call to strtok, the first parameter needs to be NULL so that strtok starts
+      // splitting the string from the next token's starting position it remembers.
+    string denominator = strtok (NULL, "/");
 
+      // Do math to find how many eighths in the note. 
+    sscanf(numerator, "%lf", &n);
+    sscanf(denominator, "%lf", &d);
+    
+    float f_eighths = n / d;
+    f_eighths /= .125;
+    int eighths = (int) f_eighths;
+    printf("%d", eighths);
 }
 
 /*frequency, which should take as input as a string a note formatted as
