@@ -57,7 +57,8 @@ int frequency(string note)
       {
         //how many semitones away from A4
         //find how many steps from A first then calculate frequency. 
-       for (char *match = *(&w_keys); *match; match++) 
+       char *n = note[0];
+       for (int i = 0; (strcmp(n, w_keys) != 0); *w_keys++) 
 
         f = (2 ^ (n/12)) * 440; 
       }
