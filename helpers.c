@@ -10,31 +10,31 @@
 // Converts a fraction formatted as X/Y to eighths
 int duration(string fraction)
 {
-  /* // Parse the fraction. */ 
-  /* string numerator = strtok(fraction, "/"); */ 
-  /* // In the next call to strtok, the first parameter needs to be NULL so that strtok starts */
-  /* // splitting the string from the next token's starting position it remembers. */
-  /* string denominator = strtok(NULL, "/"); */ 
-  /* // Do math to find how many eighths in the note. */ 
-  /* float f_eighths = (atoi(numerator)/atoi(denominator)); */
+    double d, n ; 
+    float f_eighths = 0;  
 
-  /* f_eighths /= .125; */
-
-  /* int eighths = (int)f_eighths; */
-  double d, n ; 
-  
       // Parse the fraction. 
     string numerator = strtok (fraction, "/");
       // In the next call to strtok, the first parameter needs to be NULL so that strtok starts
       // splitting the string from the next token's starting position it remembers.
     string denominator = strtok (NULL, "/");
 
-      // Do math to find how many eighths in the note. 
+    //Convert numerator to double to check for whole notes. 
     sscanf(numerator, "%lf", &n);
-    sscanf(denominator, "%lf", &d);
-    
-    float f_eighths = n / d;
+      if (n >= 1 && denominator == NULL)
+        {
+          f_eighths = n;
+        }
+      else
+        {
+            // Convert string to double.  
+          sscanf(numerator, "%lf", &n);
+          sscanf(denominator, "%lf", &d);
+          f_eighths = n / d;
+        }
+      //Divide to see how many eighths are in the note.
     f_eighths /= .125;
+      //Convert float to int. 
     int eighths = (int) f_eighths;
     printf("%d", eighths);
 }
@@ -51,7 +51,29 @@ and return as an int the note’s corresponding frequency, rounded to the neares
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
-    // TODO
+  char w_keys[] = { A, B, C, D, E, F, G}; 
+  char b_keys[] = {A#, Bb, C#, Db, D#, Eb, F#, Gb, G#, Ab};
+    if (strlen(note) == 3)
+      {
+        //how many semitones away from A4
+        //find how many steps from A first then calculate frequency. 
+       for (char *match = *(&w_keys); *match; match++) 
+
+        f = (2 ^ (n/12)) * 440; 
+      }
+    elseif(strlen(note) == 4)
+      {
+        //do other maths.
+      }
+    elseif (isrest == true)
+      {
+        f = 0; 
+      }
+    else 
+      {
+        printf("Invalid note \n");
+      }
+
 }
 
 is_rest, which should return true if its input,
