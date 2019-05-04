@@ -51,29 +51,24 @@ and return as an int the note’s corresponding frequency, rounded to the neares
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
-  char w_keys[] = { A, B, C, D, E, F, G}; 
-  char b_keys[] = {A#, Bb, C#, Db, D#, Eb, F#, Gb, G#, Ab};
-    if (strlen(note) == 3)
-      {
-        //how many semitones away from A4
-        //find how many steps from A first then calculate frequency. 
-       char *n = note[0];
-       for (int i = 0; (strcmp(n, w_keys) != 0); *w_keys++) 
 
-        f = (2 ^ (n/12)) * 440; 
-      }
-    elseif(strlen(note) == 4)
-      {
-        //do other maths.
-      }
-    elseif (isrest == true)
-      {
-        f = 0; 
-      }
-    else 
-      {
-        printf("Invalid note \n");
-      }
+// f = (2 ^ (n/12)) * 440; 
+
+typedef struct 
+{
+    char* key;
+    int step;
+}note; 
+
+// Struct for how many steps away note is within the octave. 
+
+note s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6}, 
+                {"Eb", -6},{"E", -5}, {"F", -4}, {"F#", -3}, {"Gb", -3}, 
+                {"G", -2}, {"G#", -1}, {"Ab", -1}, {"A", 0}, {"A#", 1}, 
+                {"Bb", 1}, {"B", 2}};
+
+for (int i = 0; s_tone[i].key ; i++)
+        printf("%s %d \n", s_tone[i].key, s_tone[i].step);
 
 }
 
