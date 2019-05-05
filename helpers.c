@@ -58,35 +58,37 @@ typedef struct
 {
     char* key;
     int step;
-}note; 
+}freq; 
 
 // Struct for how many semitones away note is within the octave. 
 
-note s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6}, 
+freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6}, 
                 {"Eb", -6},{"E", -5}, {"F", -4}, {"F#", -3}, {"Gb", -3}, 
                 {"G", -2}, {"G#", -1}, {"Ab", -1}, {"A", 0}, {"A#", 1}, 
                 {"Bb", 1}, {"B", 2}};
-
+                        
     char* note = "Db7";
     char* find = NULL; 
-    int octave = 0;
-    
-    find = strchr(note, '#');
+                               
+    find = strchr(note, '#');  
     find = strchr(note, 'b'); 
-    
+                                     
     if (find)
     {
-        char* tok = &(*(note - 1)); 
-        printf("%s", tok);
-        octave = atoi(&(note[2]));
-        //sprintf(note, "%s", octave);
-        note = strtok(note, tok);
-        //note = strtok(NULL, '\n');
-        printf("%d \n", octave);
-        printf("%s", note);
+        char *tmp; char octave[2]; char* p_note;
+        //allocate memory for new string. 
+        tmp = (char *) malloc(sizeof (note + 1 ));
+        // make a copy of note to work with. 
+        strcpy (tmp, note);                          
+        strcpy (octave ,tmp + 2);
+        // parse tmp, get the note by itself. 
+        p_note = strtok(tmp, octave);        
+ 
+        printf("%s \n", octave);
+        printf("%s \n", p_note);
     }
     else
-        octave = atoi(&(note[1])); 
+        strcpy (octave ,tmp + 1);
         printf("%s", note);
     
     for (int i = 0; s_tone[i].key ; i++)
