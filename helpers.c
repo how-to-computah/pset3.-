@@ -47,7 +47,7 @@ XYZ (e.g., A#4), where X is any of A through G, Y is # or b, and Z is any of 0 t
 
 and return as an int the note’s corresponding frequency, rounded to the nearest integer; and
 
-
+*/
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
@@ -60,13 +60,43 @@ typedef struct
     int step;
 }note; 
 
-// Struct for how many steps away note is within the octave. 
+// Struct for how many semitones away note is within the octave. 
 
 note s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6}, 
                 {"Eb", -6},{"E", -5}, {"F", -4}, {"F#", -3}, {"Gb", -3}, 
                 {"G", -2}, {"G#", -1}, {"Ab", -1}, {"A", 0}, {"A#", 1}, 
                 {"Bb", 1}, {"B", 2}};
 
+    char* note = "Db7";
+    char* find = NULL; 
+    int octave = 0;
+    
+    find = strchr(note, '#');
+    find = strchr(note, 'b'); 
+    
+    if (find)
+    {
+        char* tok = &(*(note - 1)); 
+        printf("%s", tok);
+        octave = atoi(&(note[2]));
+        //sprintf(note, "%s", octave);
+        note = strtok(note, tok);
+        //note = strtok(NULL, '\n');
+        printf("%d \n", octave);
+        printf("%s", note);
+    }
+    else
+        octave = atoi(&(note[1])); 
+        printf("%s", note);
+    
+    for (int i = 0; s_tone[i].key ; i++)
+        if (strcmp(note, s_tone[i].key) == 0)
+            {
+            printf("Semitones away: %d \n", s_tone[i].step);
+            break;
+            }
+        else
+            //printf("%s %d \n", s_tone[i].key, s_tone[i].step);
 for (int i = 0; s_tone[i].key ; i++)
         printf("%s %d \n", s_tone[i].key, s_tone[i].step);
 
