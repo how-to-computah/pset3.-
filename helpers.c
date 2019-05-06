@@ -52,8 +52,6 @@ and return as an int the note’s corresponding frequency, rounded to the neares
 int frequency(string note)
 {
 
-// f = (2 ^ (n/12)) * 440; 
-
 typedef struct 
 {
     char* key;
@@ -69,7 +67,7 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
                         
     char* note = "Db7";
     char* find = NULL; 
-                               
+    //There's a better way to do this. 
     find = strchr(note, '#');  
     find = strchr(note, 'b'); 
     
@@ -86,20 +84,36 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
         p_note = strtok(tmp, octave);        
     }
     else
-        strcpy (octave ,tmp + 1);
-
-  
-        printf("%s \n", octave);
-        printf("%s \n", p_note);
+    {
+       strcpy (octave ,tmp + 1);
+         // parse tmp, get the note by itself. 
+        p_note = strtok(tmp, octave);        
+    }
    
+  // iterate through the struct, find a match and get the semitones steps away
+  // for A. 
     for (int i = 0; s_tone[i].key ; i++)
         if (strcmp(note, s_tone[i].key) == 0)
             {
             printf("Semitones away: %d \n", s_tone[i].step);
+            int i_step = s_tone[i].step; 
             break;
             }
-        else
+
+    //Print out message, free up memory allocated and leave. 
+    printf("Invalid format, no match found. \n"); 
+    free(tmp);
+    exit (1);
             //printf("%s %d \n", s_tone[i].key, s_tone[i].step);
+
+
+  int i_tmp = atoi(octave) - 4; 
+  i_tmp += i_step; 
+
+  int f = (2 ^ (i_tmp/12)) * 440; 
+  printf("%d \n", f);
+
+
 for (int i = 0; s_tone[i].key ; i++)
         printf("%s %d \n", s_tone[i].key, s_tone[i].step);
 
