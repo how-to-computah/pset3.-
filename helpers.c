@@ -132,6 +132,11 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
  // Determines whether a string represents a rest
 bool is_rest(string s)
 {
-    // TODO
+  if(s == ""){
+    return true;  
+  }
+  else {
+    return false; 
+  }
 }
 
