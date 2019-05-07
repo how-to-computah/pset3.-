@@ -50,7 +50,8 @@ and return as an int the note’s corresponding frequency, rounded to the neares
 int frequency(string note)
 {
 
-typedef struct 
+{
+    typedef struct 
 {
     char* key;
     int step;
@@ -63,13 +64,15 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
                 {"G", -2}, {"G#", -1}, {"Ab", -1}, {"A", 0}, {"A#", 1}, 
                 {"Bb", 1}, {"B", 2}};
                         
-    char* note = "Db7";
+    char* note = "B3";
     char* find = NULL; 
+    int i_step = 0; int i_tmp = 0;
+    float f = 0;
     //There's a better way to do this. 
     find = strchr(note, '#');  
     find = strchr(note, 'b'); 
     
-   char *tmp; char octave[2]; char* p_note;
+   char *tmp; char octave[2];
     //allocate memory for new string. 
     tmp = (char *) malloc(sizeof (note + 1 ));
     // make a copy of note to work with. 
@@ -78,34 +81,44 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
     if (find){
         strcpy (octave ,tmp + 2);
         // parse tmp, get the note by itself. 
-        p_note = strtok(tmp, octave);        
+        tmp = strtok(tmp, octave);        
     }
     else{
        strcpy (octave ,tmp + 1);
          // parse tmp, get the note by itself. 
-        p_note = strtok(tmp, octave);        
+        tmp = strtok(tmp, octave);        
     }
   // iterate through the struct, find a match and get the semitones steps away
   // for A. 
-    for (int i = 0; s_tone[i].key ; i++)
-        if (strcmp(note, s_tone[i].key) == 0){
+    for (int i = 0; s_tone[i].key ; i++){
+        if (strcmp(tmp, s_tone[i].key) == 0){
           printf("Semitones away: %d \n", s_tone[i].step);
-          int i_step = s_tone[i].step; 
+          i_step = s_tone[i].step; 
           break;
         }
-        elseif(i == 16 && (strcmp(note, s_tone[i].key) != 0)){
+        else if(i == 16 && (strcmp(tmp, s_tone[i].key) != 0)){
           //Print out error message, free up memory allocated and leave. 
           printf("Invalid format, no match found. \n"); 
           free(tmp);
           exit (1);
         }
+    }
             //printf("%s %d \n", s_tone[i].key, s_tone[i].step);
-
-  int i_tmp = (atoi(octave) - 4) * 12; 
+  // Set i_tmp to the total semitones away from A4 based on octaves only. 
+  i_tmp = (atoi(octave) - 4) * 12; 
+  // Now add in how many steps away within the octave. 
   i_tmp += i_step; 
-
-  int f = (2 ^ (i_tmp/12)) * 440; 
-  printf("%d \n", f);
+  // set f to the floating point version for maths and precision. 
+  f = (float) i_tmp;  
+  // Perform exponentials and round off to nearest whole number. 
+  f = roundf(powf(2.000, f/12.000)* 440);
+  // Convert f to float and store in i_tmp.
+  i_tmp = (int) f; 
+  printf("%d \n", i_tmp);
+  //No mermory leaks. 
+  free(tmp);
+    return 0;
+}
 
 for (int i = 0; s_tone[i].key ; i++)
         printf("%s %d \n", s_tone[i].key, s_tone[i].step);
@@ -122,4 +135,4 @@ bool is_rest(string s)
 {
     // TODO
 }
-*/
+
