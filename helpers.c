@@ -58,15 +58,15 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
                 {"G", -2}, {"G#", -1}, {"Ab", -1}, {"A", 0}, {"A#", 1}, 
                 {"Bb", 1}, {"B", 2}};
                         
-    char* note = "B3";
     char* find = NULL; 
+    char *tmp; char octave[2];
     int i_step = 0; int i_tmp = 0;
     float f = 0;
-    //There's a better way to do this. 
-    find = strchr(note, '#');  
-    find = strchr(note, 'b'); 
     
-   char *tmp; char octave[2];
+    //There's a better way to do this. 
+    find = strtok(note, '#');  
+    find = strtok(note, 'b'); 
+    
     //allocate memory for new string. 
     tmp = (char *) malloc(sizeof (note + 1 ));
     // make a copy of note to work with. 
@@ -86,13 +86,14 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
   // iterate through the struct, find a match and get the semitones steps away
   // for A. 
     for (int i = 0; s_tone[i].key ; i++){
+        // Found a match, assign the integer value for steps away from A. 
         if (strcmp(tmp, s_tone[i].key) == 0){
           i_step = s_tone[i].step; 
           printf("%s %d \n", s_tone[i].key, s_tone[i].step);
           break;
         }
+        //Print out error message, free up memory allocated and leave. 
         else if(i == 16 && (strcmp(tmp, s_tone[i].key) != 0)){
-          //Print out error message, free up memory allocated and leave. 
           printf("Invalid format, no match found. \n"); 
           free(tmp);
           exit (1);
@@ -115,7 +116,6 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
   // Convert f to float and store in i_tmp.
   i_tmp = (int) f; 
 
-  printf("%d \n", i_tmp);
   //No mermory leaks. 
   free(tmp);
     return 0;
