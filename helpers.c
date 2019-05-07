@@ -52,6 +52,9 @@ int frequency(string note)
     int step;
 }freq; 
 
+if(note == NULL){
+  return; 
+}
 // Struct for how many semitones away note is within the octave. 
 freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6}, 
                 {"Eb", -6},{"E", -5}, {"F", -4}, {"F#", -3}, {"Gb", -3}, 
@@ -65,7 +68,9 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
     
     //There's a better way to do this. 
     find = strtok(note, '#');  
-    find = strtok(note, 'b'); 
+    if (find == NULL){
+      find = strtok(note, 'b'); 
+    }
     
     //allocate memory for new string. 
     tmp = (char *) malloc(sizeof (note + 1 ));
