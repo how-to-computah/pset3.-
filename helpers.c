@@ -111,6 +111,7 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
   // set f to the floating point version for maths and precision. 
   f = (float) i_tmp;  
   // Perform exponentials and round off to nearest whole number. 
+  // f = (2 ^ (n/12) * 440))
   f = roundf(powf(2.000, f/12.000)* 440);
   // Convert f to float and store in i_tmp.
   i_tmp = (int) f; 
