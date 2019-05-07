@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 #include "helpers.h"
-#include "cs50.h"
+#include <cs50.h>
 /*duration, which should take as input as a string a fraction (e.g., 1/4)
-    and return as an int a corresponding number of eigths (2, in this case, since 1/4 is equivalent to 2/8)*/
+and return as an int a corresponding number of eigths (2, in this case, since 1/4 is equivalent to 2/8)*/
 
 // Converts a fraction formatted as X/Y to eighths
 int duration(string fraction)
@@ -38,18 +38,13 @@ int duration(string fraction)
 }
 
 /*frequency, which should take as input as a string a note formatted as
-
 XY (e.g., A4), where X is any of A through G and Y is any of 0 through 8, or
-
 XYZ (e.g., A#4), where X is any of A through G, Y is # or b, and Z is any of 0 through 8,
-
 and return as an int the note’s corresponding frequency, rounded to the nearest integer; and
-
 */
+
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
-{
-
 {
     typedef struct 
 {
@@ -58,7 +53,6 @@ int frequency(string note)
 }freq; 
 
 // Struct for how many semitones away note is within the octave. 
-
 freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6}, 
                 {"Eb", -6},{"E", -5}, {"F", -4}, {"F#", -3}, {"Gb", -3}, 
                 {"G", -2}, {"G#", -1}, {"Ab", -1}, {"A", 0}, {"A#", 1}, 
@@ -78,6 +72,7 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
     // make a copy of note to work with. 
     strcpy (tmp, note);                          
 
+    //Check to see the if the note is sharp or flat. 
     if (find){
         strcpy (octave ,tmp + 2);
         // parse tmp, get the note by itself. 
@@ -92,8 +87,8 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
   // for A. 
     for (int i = 0; s_tone[i].key ; i++){
         if (strcmp(tmp, s_tone[i].key) == 0){
-          printf("Semitones away: %d \n", s_tone[i].step);
           i_step = s_tone[i].step; 
+          printf("%s %d \n", s_tone[i].key, s_tone[i].step);
           break;
         }
         else if(i == 16 && (strcmp(tmp, s_tone[i].key) != 0)){
@@ -103,35 +98,33 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
           exit (1);
         }
     }
-            //printf("%s %d \n", s_tone[i].key, s_tone[i].step);
+
   // Set i_tmp to the total semitones away from A4 based on octaves only. 
   i_tmp = (atoi(octave) - 4) * 12; 
+  
   // Now add in how many steps away within the octave. 
   i_tmp += i_step; 
+  
   // set f to the floating point version for maths and precision. 
   f = (float) i_tmp;  
+  
   // Perform exponentials and round off to nearest whole number. 
   // f = (2 ^ (n/12) * 440))
   f = roundf(powf(2.000, f/12.000)* 440);
+  
   // Convert f to float and store in i_tmp.
   i_tmp = (int) f; 
+
   printf("%d \n", i_tmp);
   //No mermory leaks. 
   free(tmp);
     return 0;
 }
-
-for (int i = 0; s_tone[i].key ; i++)
-        printf("%s %d \n", s_tone[i].key, s_tone[i].step);
-
-}
-
-is_rest, which should return true if its input,
-    a string, represents a rest in our machine-readable format, otherwise false.
-
-
-
-// Determines whether a string represents a rest
+/*
+  is_rest, which should return true if its input,
+  a string, represents a rest in our machine-readable format, otherwise false.
+*/
+ // Determines whether a string represents a rest
 bool is_rest(string s)
 {
     // TODO
