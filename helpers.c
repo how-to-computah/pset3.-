@@ -21,17 +21,15 @@ int duration(string fraction)
 
     //Convert numerator to double to check for whole notes. 
     sscanf(numerator, "%lf", &n);
-      if (n >= 1 && denominator == NULL)
-        {
-          f_eighths = n;
-        }
-      else
-        {
-            // Convert string to double.  
-          sscanf(numerator, "%lf", &n);
-          sscanf(denominator, "%lf", &d);
-          f_eighths = n / d;
-        }
+    if (n >= 1 && denominator == NULL){
+        f_eighths = n;
+      }
+      else{
+        // Convert string to double.  
+      sscanf(numerator, "%lf", &n);
+      sscanf(denominator, "%lf", &d);
+        f_eighths = n / d;
+      }
       //Divide to see how many eighths are in the note.
     f_eighths /= .125;
       //Convert float to int. 
@@ -77,42 +75,37 @@ freq s_tone[] = {{"C", -9}, {"C#", -8}, {"Db", -8}, {"D", -7}, {"D#", -6},
     // make a copy of note to work with. 
     strcpy (tmp, note);                          
 
-    if (find)
-    {
+    if (find){
         strcpy (octave ,tmp + 2);
         // parse tmp, get the note by itself. 
         p_note = strtok(tmp, octave);        
     }
-    else
-    {
+    else{
        strcpy (octave ,tmp + 1);
          // parse tmp, get the note by itself. 
         p_note = strtok(tmp, octave);        
     }
-   
   // iterate through the struct, find a match and get the semitones steps away
   // for A. 
     for (int i = 0; s_tone[i].key ; i++)
-        if (strcmp(note, s_tone[i].key) == 0)
-            {
-            printf("Semitones away: %d \n", s_tone[i].step);
-            int i_step = s_tone[i].step; 
-            break;
-            }
-
-    //Print out message, free up memory allocated and leave. 
-    printf("Invalid format, no match found. \n"); 
-    free(tmp);
-    exit (1);
+        if (strcmp(note, s_tone[i].key) == 0){
+          printf("Semitones away: %d \n", s_tone[i].step);
+          int i_step = s_tone[i].step; 
+          break;
+        }
+        elseif(i == 16 && (strcmp(note, s_tone[i].key) != 0)){
+          //Print out error message, free up memory allocated and leave. 
+          printf("Invalid format, no match found. \n"); 
+          free(tmp);
+          exit (1);
+        }
             //printf("%s %d \n", s_tone[i].key, s_tone[i].step);
 
-
-  int i_tmp = atoi(octave) - 4; 
+  int i_tmp = (atoi(octave) - 4) * 12; 
   i_tmp += i_step; 
 
   int f = (2 ^ (i_tmp/12)) * 440; 
   printf("%d \n", f);
-
 
 for (int i = 0; s_tone[i].key ; i++)
         printf("%s %d \n", s_tone[i].key, s_tone[i].step);
